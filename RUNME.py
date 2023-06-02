@@ -91,4 +91,4 @@ if __name__ == '__main__':
         # weights for the interpolation of potential data at the N-electrode location
         data.append(np.dot((Mw.T - Nw.T), potentials[:, i]))  # calculate the potential difference data as "M - N"
 
-    print('RESnet-m-py Test Passed!')
+    print('RESnet-py Test Passed!')
