@@ -45,7 +45,16 @@ def function(edges, C, sources):
 
     # Matrix factorization and Solve for multiple rhs
     pardiso_solver = PyPardiso(A, matrix_type=1)
-    potentials = pardiso_solver.solve(sources)
+    if sources.shape[1] == 1:
+        potentials = pardiso_solver.solve(sources)
+    else:
+        potentials_tmp = []
+        for i in range(sources.shape[1]):
+            source = sources[:, i]
+            source = source.astype(np.float64)
+            potentials_tmp.append(pardiso_solver.solve(source))
+        potentials = [list(column) for column in zip(*potentials_tmp)]
+        potentials = np.array(potentials)
     pardiso_solver.release()  # Release memory
 
     # Compute potential difference (E field) on all edges

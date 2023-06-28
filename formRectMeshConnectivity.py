@@ -47,28 +47,26 @@ def function(nodeX, nodeY, nodeZ):
     The indexing='ij' parameter in meshgrid() is used to match the indexing convention of MATLAB.
     my_ravel() is used to flatten the arrays a, c, and b into 1D arrays.
     """
-    c, b, a = np.meshgrid(nodeX, nodeZ, nodeY, indexing='ij')
-    a = my_ravel(a)
-    b = my_ravel(b)
-    c = my_ravel(c)
+    a, b, c = np.meshgrid(nodeX, nodeZ, nodeY)
+    a, b, c = np.ravel(a, order='F'), np.ravel(b, order='F'), np.ravel(c, order='F')
     nodes = np.column_stack((a, c, b))  # X-Y-Z location (note ordering)
 
     # Create edges list (index to nodes)
     # x-direction edges
-    y_node, z_node, x_cell = np.meshgrid(range(1, Nx + 1), range(1, Nz + 1), range(1, Ny), indexing='ij')
-    x_cell, y_node, z_node = my_ravel(x_cell), my_ravel(y_node), my_ravel(z_node)
+    a, b, c = np.meshgrid(range(1, Nx), range(1, Nz + 1), range(1, Ny + 1))
+    x_cell, y_node, z_node = np.ravel(a, order='F'), np.ravel(c, order='F'), np.ravel(b, order='F')
     x1 = (Nx * Nz) * (y_node - 1) + Nz * (x_cell - 1) + z_node
     x2 = x1 + Nz
 
     # y-direction edges
-    y_cell, z_node, x_node = np.meshgrid(range(1, Nx), range(1, Nz + 1), range(1, Ny + 1), indexing='ij')
-    x_node, y_cell, z_node = my_ravel(x_node), my_ravel(y_cell), my_ravel(z_node)
+    a, b, c = np.meshgrid(range(1, Nx + 1), range(1, Nz + 1), range(1, Ny))
+    x_node, y_cell, z_node = np.ravel(a, order='F'), np.ravel(c, order='F'), np.ravel(b, order='F')
     y1 = (Nx * Nz) * (y_cell - 1) + Nz * (x_node - 1) + z_node
     y2 = y1 + Nx * Nz
 
     # z-direction edges
-    y_node, z_cell, x_node = np.meshgrid(range(1, Nx + 1), range(1, Nz), range(1, Ny + 1), indexing='ij')
-    x_node, y_node, z_cell = my_ravel(x_node), my_ravel(y_node), my_ravel(z_cell)
+    a, b, c = np.meshgrid(range(1, Nx + 1), range(1, Nz), range(1, Ny + 1))
+    x_node, y_node, z_cell = np.ravel(a, order='F'), np.ravel(c, order='F'), np.ravel(b, order='F')
     z1 = (Nx * Nz) * (y_node - 1) + Nz * (x_node - 1) + z_cell
     z2 = z1 + 1
 

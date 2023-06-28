@@ -50,7 +50,7 @@ def function(edges, lengths, faces, cells, volumes):
 
     Cell2Edge = spdiags(1 / lengths ** 2, 0, Nedges, Nedges) @ coo_matrix((np.ones(len(J)), (J, I)),
                                                                           shape=(Nedges, Ncells),
-                                                                          dtype=np.int).tocsr() @ spdiags(volumes / 4,
+                                                                          dtype=np.int64).tocsr() @ spdiags(volumes / 4,
                                                                                                           0, Ncells,
                                                                                                           Ncells)
 

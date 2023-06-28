@@ -38,7 +38,7 @@ def function(edges, lengths, faces, areas):
     J = np.subtract(faces.flatten(), 1)
     Face2Edge = spdiags(1 / lengths ** 2, 0, Nedges, Nedges) @ coo_matrix((np.ones(len(J)), (J, I)),
                                                                           shape=(Nedges, Nfaces),
-                                                                          dtype=np.int).tocsr() @ spdiags(areas / 2, 0,
+                                                                          dtype=np.int64).tocsr() @ spdiags(areas / 2, 0,
                                                                                                           Nfaces,
                                                                                                           Nfaces)
     return Face2Edge
