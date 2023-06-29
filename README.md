@@ -14,6 +14,10 @@ Run the following scripts:
 
 - Example_Halfspace.py: Verification of the numerical accuracy by comparing with the analytic solution of a half-space
 
+- Example_Casing.py: Simulation of the surface electric field with the presence of steel well casing
+
+- Example_Infrastructure.py: Effect of complex metallic infrastructure on the surface dc resistivity data
+
 #### Note：
 
 This code solves large sparse matrices by calling the MKL PyPardiso interface PyPardiso.py, and a testing code can be found in PyPardisoExample.py. 
