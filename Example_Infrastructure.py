@@ -135,7 +135,6 @@ if __name__ == '__main__':
     plt.xlabel('X (m)')
     plt.ylabel('n-spacing')
     plt.title('(1) Model #1: Half-space')
-    plt.show()
 
     '''Define Model #2: Two blocks in half-space'''
     blkLoc = np.array([[-np.inf, np.inf, -np.inf, np.inf, np.inf, 0],  # a uniform layer for the air (above surface)
@@ -218,7 +217,6 @@ if __name__ == '__main__':
     plt.ylabel('n-spacing')
     plt.title('(2) Model #2: Two blocks')
     plt.grid(True)
-    plt.show()
 
     '''Define Model #3: Infrastructure'''
     blkLoc = np.array([[-np.inf, np.inf, -np.inf, np.inf, np.inf, 0],  # a uniform layer for the air (above surface)
@@ -314,7 +312,6 @@ if __name__ == '__main__':
     plt.xlabel('X (m)')
     plt.ylabel('n-spacing')
     plt.title('(3) Model #3: Infrastructure')
-    plt.show()
 
     '''Define Model #4: Above-ground pipe'''
     blkLoc = np.array([
