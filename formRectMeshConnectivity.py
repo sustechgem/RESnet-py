@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def function(nodeX, nodeY, nodeZ):
+def formRectMeshConnectivity(nodeX, nodeY, nodeZ):
     """
     Form the connectivity information for a given rectilinear mesh
 

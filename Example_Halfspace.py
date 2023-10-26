@@ -3,13 +3,13 @@ import time
 import numpy as np
 from matplotlib import pyplot as plt
 
-import calcTrilinearInterpWeights
-import formCell2EdgeMatrix
-import formEdge2EdgeMatrix
-import formFace2EdgeMatrix
-import formRectMeshConnectivity
-import makeRectMeshModelBlocks
-import solveRESnet
+from calcTrilinearInterpWeights import calcTrilinearInterpWeights
+from formCell2EdgeMatrix import formCell2EdgeMatrix
+from formEdge2EdgeMatrix import formEdge2EdgeMatrix
+from formFace2EdgeMatrix import formFace2EdgeMatrix
+from formRectMeshConnectivity import formRectMeshConnectivity
+from makeRectMeshModelBlocks import makeRectMeshModelBlocks
+from solveRESnet import solveRESnet
 
 if __name__ == '__main__':
     """
@@ -53,15 +53,15 @@ if __name__ == '__main__':
 
     '''Form a resistor network'''
     # Get connectivity properties of nodes, edges, faces, cells
-    nodes, edges, lengths, faces, areas, cells, volumes = formRectMeshConnectivity.function(nodeX, nodeY, nodeZ)
+    nodes, edges, lengths, faces, areas, cells, volumes = formRectMeshConnectivity(nodeX, nodeY, nodeZ)
 
     # Get conductive property model vectors (convert the block-model description to values on edges, faces and cells)
-    cellCon, faceCon, edgeCon = makeRectMeshModelBlocks.function(nodeX, nodeY, nodeZ, blkLoc, blkCon, [], [], [])
+    cellCon, faceCon, edgeCon = makeRectMeshModelBlocks(nodeX, nodeY, nodeZ, blkLoc, blkCon, [], [], [])
 
     # Convert all conductive objects to conductance on edges
-    Edge2Edge = formEdge2EdgeMatrix.function(edges, lengths)
-    Face2Edge = formFace2EdgeMatrix.function(edges, lengths, faces, areas)
-    Cell2Edge = formCell2EdgeMatrix.function(edges, lengths, faces, cells, volumes)
+    Edge2Edge = formEdge2EdgeMatrix(edges, lengths)
+    Face2Edge = formFace2EdgeMatrix(edges, lengths, faces, areas)
+    Cell2Edge = formCell2EdgeMatrix(edges, lengths, faces, cells, volumes)
     Ce = Edge2Edge.dot(edgeCon)  # conductance from edges
     Cf = Face2Edge.dot(faceCon)  # conductance from faces
     Cc = Cell2Edge.dot(cellCon)  # conductance from cells
@@ -74,13 +74,13 @@ if __name__ == '__main__':
     sources = np.zeros((nodes.shape[0], Ntx))
     for i in range(Ntx):
         # weights for the distribution of point current source to the neighboring nodes
-        weights = calcTrilinearInterpWeights.function(nodeX, nodeY, nodeZ, tx[i][:, 0:3])
+        weights = calcTrilinearInterpWeights(nodeX, nodeY, nodeZ, tx[i][:, 0:3])
         # total current intensities at all the nodes
         sources[:, i] = weights.dot(tx[i][:, 3])
 
     # Obtain potentials at the nodes, potential differences and current along the edges
     start_time = time.time()
-    potentials, potentialDiffs, currents = solveRESnet.function(edges, C, sources)
+    potentials, potentialDiffs, currents = solveRESnet(edges, C, sources)
     end_time = time.time()
     print(f"Time: {(end_time - start_time):.6f} seconds")
 
@@ -88,8 +88,8 @@ if __name__ == '__main__':
     potentials = potentials.reshape((-1, 1))
     data = []
     for i in range(Ntx):
-        Mw = calcTrilinearInterpWeights.function(nodeX, nodeY, nodeZ, rx[i][:, :3])
-        Nw = calcTrilinearInterpWeights.function(nodeX, nodeY, nodeZ, rx[i][:, 3:6])
+        Mw = calcTrilinearInterpWeights(nodeX, nodeY, nodeZ, rx[i][:, :3])
+        Nw = calcTrilinearInterpWeights(nodeX, nodeY, nodeZ, rx[i][:, 3:6])
         data.append((Mw.T - Nw.T) @ potentials[:, i])
 
     '''Compare against analytic solutions'''

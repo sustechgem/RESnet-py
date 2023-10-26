@@ -1,7 +1,7 @@
 from scipy.sparse import spdiags
 
 
-def function(edges, lengths):
+def formEdge2EdgeMatrix(edges, lengths):
     """
     Form the mapping matrix that transforms edge conductivity model (edgeCon in S*m)
     to conductance on edges.

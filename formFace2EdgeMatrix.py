@@ -2,7 +2,7 @@ import numpy as np
 from scipy.sparse import spdiags, coo_matrix
 
 
-def function(edges, lengths, faces, areas):
+def formFace2EdgeMatrix(edges, lengths, faces, areas):
     """
     Form the mapping matrix that transforms face conductivity model (faceCon in S)
     to conductance on edges.

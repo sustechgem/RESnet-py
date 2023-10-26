@@ -2,7 +2,7 @@ import numpy as np
 from scipy.sparse import csc_matrix
 
 
-def function(nodeX, nodeY, nodeZ, points):
+def calcTrilinearInterpWeights(nodeX, nodeY, nodeZ, points):
     """
     Core function of the trilinear interpolation. Calculate the weights of
     the eight neighboring nodes surrounding a given point in a lattice grid.

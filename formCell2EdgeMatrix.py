@@ -2,7 +2,7 @@ import numpy as np
 from scipy.sparse import spdiags, coo_matrix
 
 
-def function(edges, lengths, faces, cells, volumes):
+def formCell2EdgeMatrix(edges, lengths, faces, cells, volumes):
     """
     Form the mapping matrix that transforms cell conductivity model (cellCon in S/m) to conductance on edges.
 

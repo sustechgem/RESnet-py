@@ -1,9 +1,9 @@
 import numpy as np
 
-import formRectMeshConnectivity
+from formRectMeshConnectivity import formRectMeshConnectivity
 
 
-def function(nodeX, nodeY, nodeZ, blkLoc, blkVal, bkgCellVal=0, bkgFaceVal=0, bkgEdgeVal=0):
+def makeRectMeshModelBlocks(nodeX, nodeY, nodeZ, blkLoc, blkVal, bkgCellVal=0, bkgFaceVal=0, bkgEdgeVal=0):
     """
     Make edgeCon, faceCon, cellCon models using blocks
 
@@ -70,7 +70,7 @@ def function(nodeX, nodeY, nodeZ, blkLoc, blkVal, bkgCellVal=0, bkgFaceVal=0, bk
     cellVal = np.zeros(Ncells) + bkgCellVal
 
     # Get connectivity lists from mesh definition
-    nodes, edges, _, faces, _, cells, _ = formRectMeshConnectivity.function(nodeX, nodeY, nodeZ)
+    nodes, edges, _, faces, _, cells, _ = formRectMeshConnectivity(nodeX, nodeY, nodeZ)
 
     # Replace inf with the outmost boundary
     blkLoc = np.atleast_2d(blkLoc)  # Converts a one-dimensional array to a two-dimensional array
