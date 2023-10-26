@@ -1,6 +1,7 @@
 # RESnet-py
+Dikun Yang (yangdikun@gmail.com)
 
-3D resistor network solution for d.c. forward simulation problems. Python implementation.
+**3D resistor network solution for d.c. forward simulation problems. Python implementation.**
 
 This is a python implementation of the Matlab code to solve for the electric field of subsurface under the excitation of d.c. sources.
 
@@ -20,5 +21,8 @@ Run the following scripts:
 
 #### Note：
 
-This code solves large sparse matrices by calling the MKL PyPardiso interface PyPardiso.py, and a testing code can be found in PyPardisoExample.py. 
-PyPardiso.py is made available by Wang Ke.
+This code only requires Numpy and Scipy for scientific computing and Matplotlib for data visualization. There are no specific requirements for the package version.
+
+The current code implementation solves large sparse matrices by calling the MKL PARDISO interface PyPardiso.py; a testing script PyPardisoExample.py is provided along with the interface function. 
+The PARDISO solver comes with the package "mkl" as part of the standard installation of Numpy in Anaconda. Sometimes a "Segmentation 
+fault" error occurs when calling the mkl library; the problem can be fixed by creating a new environment and freshly installing the recommended package versions (see requirements.txt).
