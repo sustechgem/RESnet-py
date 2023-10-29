@@ -11,14 +11,20 @@
 import ctypes
 from ctypes.util import find_library
 import numpy as np
-
+import os
 
 
 class PyPardiso:
     def __init__(self,A=None,b=None,matrix_type=13,phase=12):
         self.A = A
         self.mkl_dll = None
-        mkl_path = find_library('mkl_rt.1')
+
+        mkl_path = None
+
+        if mkl_path is None:
+            mkl_path = find_library('mkl_rt.2')
+        if mkl_path is None:
+            mkl_path = find_library('mkl_rt.1')
         if mkl_path is None:
             mkl_path = find_library('mkl_rt')
         if mkl_path is None:
