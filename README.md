@@ -25,4 +25,4 @@ This code only requires Numpy and Scipy for scientific computing and Matplotlib 
 
 The current code implementation solves large sparse matrices by calling the MKL PARDISO interface PyPardiso.py; a testing script PyPardisoExample.py is provided along with the interface function. 
 The PARDISO solver comes with the package "mkl" as part of the standard installation of Numpy in Anaconda. Sometimes a "Segmentation 
-fault" error occurs when calling the mkl library; the problem can be fixed by creating a new environment and freshly installing the recommended package versions (see requirements.txt).
+fault" error occurs when calling the mkl library. The problem can be fixed by creating a new environment and freshly installing the recommended package versions specified in environment.yml. If the codes do not run on your computer, it is very likely the solver does not work properly. You have the option of replacing it with your own solver or making sure the DLL file name (e.g. mkl_rt.1) is correctly specified in PyPardiso.py. The current PyPardiso.py has included a few variants of the DLL file that have been found in different Numpy installations. 
