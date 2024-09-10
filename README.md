@@ -19,6 +19,12 @@ Run the following scripts:
 
 - Example_Infrastructure.py: Effect of complex metallic infrastructure on the surface dc resistivity data
 
+Tutorials and citations:
+
+- Dikun Yang, Douglas Oldenburg, and Lindsey Heagy, (2016), "3D DC resistivity modeling of steel casing for reservoir monitoring using equivalent resistor network," SEG Technical Program Expanded Abstracts : 932-936.
+
+- Dikun Yang, (2024), "RESnet: 3D direct-current resistivity simulation using the equivalent resistor network circuit," GEOPHYSICS 89: F41-F51.
+
 #### Note：
 
 This code only requires Numpy and Scipy for scientific computing and Matplotlib for data visualization. There are no specific requirements for the package version.
